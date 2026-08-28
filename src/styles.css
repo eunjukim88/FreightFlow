@@ -312,6 +312,42 @@ textarea {
 .toolbar select {
   padding: 0 10px;
 }
+.date-controls {
+  display: flex;
+  gap: 6px;
+}
+.date-shortcut,
+.date-picker {
+  height: 36px;
+  border: 1px solid #dfe4eb;
+  background: #fff;
+  color: #596579;
+  border-radius: 7px;
+  padding: 0 10px;
+  font-size: 13px;
+}
+.date-shortcut.active {
+  background: #eff6ff;
+  border-color: #9dc0fb;
+  color: #2563eb;
+  font-weight: 600;
+}
+.date-picker {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+}
+.date-picker svg {
+  color: #5f81ba;
+}
+.date-picker input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  padding: 0;
+  color: #3e4858;
+}
 .search {
   display: flex;
   align-items: center;

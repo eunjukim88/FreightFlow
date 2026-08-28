@@ -3,6 +3,7 @@ import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import {
   AlertCircle,
   ArrowLeft,
+  CalendarDays,
   CheckCircle2,
   ChevronRight,
   Link2,
@@ -140,16 +141,18 @@ function FreightTable({ rows }: { rows: Freight[] }) {
 export function FreightPage({ store }: { store: Store }) {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("전체");
+  const [selectedDate, setSelectedDate] = useState(today);
   const rows = useMemo(
     () =>
       store.freights.filter(
         (f) =>
-          f.date === today &&
+          f.date === selectedDate &&
           `${f.customer}${f.depositor}${f.cargo}`.includes(query) &&
           (filter === "전체" || payment(f) === filter),
       ),
-    [store, query, filter],
+    [store, query, filter, selectedDate],
   );
+  const previousDate = "2026-08-27";
   return (
     <div className="content">
       <PageTitle
@@ -161,7 +164,35 @@ export function FreightPage({ store }: { store: Store }) {
         }
       />
       <div className="toolbar">
-        <label>2026.08.28</label>
+        <div className="date-controls">
+          <button
+            className={
+              selectedDate === previousDate
+                ? "date-shortcut active"
+                : "date-shortcut"
+            }
+            onClick={() => setSelectedDate(previousDate)}
+          >
+            전일
+          </button>
+          <button
+            className={
+              selectedDate === today ? "date-shortcut active" : "date-shortcut"
+            }
+            onClick={() => setSelectedDate(today)}
+          >
+            당일
+          </button>
+          <label className="date-picker">
+            <CalendarDays size={16} />
+            <input
+              type="date"
+              value={selectedDate}
+              onChange={(event) => setSelectedDate(event.target.value)}
+              aria-label="배차일 선택"
+            />
+          </label>
+        </div>
         <div className="search">
           <Search size={16} />
           <input
