@@ -71,6 +71,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
     ["/freight", "배차관리", Truck],
     ["/deposits", "입금확인", Banknote],
     ["/closing", "마감관리", ClipboardCheck],
+    ["/history", "이력조회", BarChart3],
     ["/settings", "설정", Settings],
   ] as const;
   return (

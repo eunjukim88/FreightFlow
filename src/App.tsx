@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Shell } from "./components";
-import { Dashboard, FreightDetail, FreightForm, FreightPage } from "./pages";
+import { FreightDetail, FreightForm, FreightPage } from "./pages";
+import { Dashboard } from "./dashboard";
 import { ClosingPage, DepositsPage, SettingsPage } from "./operations";
+import { HistoryPage } from "./history";
 import { getStore, saveStore, type Store } from "./lib";
 
 export default function App() {
@@ -36,6 +38,7 @@ export default function App() {
           path="/closing"
           element={<ClosingPage store={store} update={update} />}
         />
+        <Route path="/history" element={<HistoryPage store={store} />} />
         <Route
           path="/settings"
           element={<SettingsPage store={store} update={update} />}

@@ -42,58 +42,7 @@ export const Card = ({
   </Link>
 );
 const profit = (freight: Freight) => freight.sales - freight.purchase;
-export function Dashboard({ store }: { store: Store }) {
-  const orders = store.freights.filter((f) => f.date === today);
-  const totals = summary(orders);
-  const done = orders.filter((f) => payment(f) === "완료").length;
-  const unpaid = orders.filter((f) => payment(f) === "미입금").length;
-  const unmatched = store.transactions.filter(
-    (t) => t.status === "미매칭",
-  ).length;
-  return (
-    <div className="content">
-      <PageTitle title="오늘 업무" />
-      <div className="grid four">
-        <Card label="오늘 배차" value={`${orders.length}건`} href="/freight" />
-        <Card label="입금완료" value={`${done}건`} href="/deposits" />
-        <Card label="미입금" value={`${unpaid}건`} href="/freight" />
-        <Card
-          label="오늘 예상수익"
-          value={money(totals.sales - totals.purchase)}
-          href="/closing"
-        />
-      </div>
-      <section className="panel">
-        <h2>오늘 확인할 업무</h2>
-        <div className="tasks">
-          <Link to="/freight">
-            <AlertCircle />
-            미입금 <b>{unpaid}건</b>
-            <ChevronRight />
-          </Link>
-          <Link to="/deposits">
-            <AlertCircle />
-            입금 미매칭 <b>{unmatched}건</b>
-            <ChevronRight />
-          </Link>
-          <Link to="/freight">
-            <AlertCircle />
-            기사 미배정 <b>{orders.filter((f) => !f.driver).length}건</b>
-            <ChevronRight />
-          </Link>
-        </div>
-      </section>
-      <section className="panel">
-        <div className="section-head">
-          <h2>오늘 배차</h2>
-          <Link to="/freight">전체보기</Link>
-        </div>
-        <FreightTable rows={orders.slice(0, 6)} />
-      </section>
-    </div>
-  );
-}
-function FreightTable({ rows }: { rows: Freight[] }) {
+export function FreightTable({ rows }: { rows: Freight[] }) {
   if (!rows.length)
     return <Empty text="오늘 등록된 화물이 없습니다." href="/freight/new" />;
   return (
