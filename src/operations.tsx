@@ -372,16 +372,6 @@ export function SettingsPage({
           {testing ? "계좌를 확인하고 있습니다..." : "계좌 연결 테스트"}
         </button>
       </section>
-      <section className="panel">
-        <h2>은행 입금내역 Excel 업로드</h2>
-        <p>은행에서 내려받은 CSV 파일을 올려 입금내역을 확인할 수 있습니다.</p>
-        <button
-          className="button secondary"
-          onClick={() => update(importTransactions(store))}
-        >
-          샘플 CSV 데이터 불러오기
-        </button>
-      </section>
       <section className="panel danger-zone">
         <h2>데모 데이터</h2>
         <p>등록·수정한 모든 데모 데이터를 최초 상태로 되돌립니다.</p>
