@@ -43,94 +43,28 @@ export function Dashboard({ store }: { store: Store }) {
           href="/closing"
         />
       </div>
-      <div className="dashboard-columns">
-        <section className="panel dashboard-focus">
-          <div className="section-head">
-            <div>
-              <h2>오늘 확인할 업무</h2>
-              <p>마감 전 처리해야 할 항목입니다.</p>
-            </div>
-            <Link to="/history">업무이력 보기</Link>
-          </div>
-          <div className="tasks">
-            <Link to="/freight">
-              <AlertCircle />
-              미입금 <b>{unpaid}건</b>
-              <ChevronRight />
-            </Link>
-            <Link to="/deposits">
-              <AlertCircle />
-              입금 미매칭 <b>{unmatched}건</b>
-              <ChevronRight />
-            </Link>
-            <Link to="/freight">
-              <AlertCircle />
-              기사 미배정 <b>{orders.filter((f) => !f.driver).length}건</b>
-              <ChevronRight />
-            </Link>
-          </div>
-        </section>
-        <section className="panel daily-brief">
-          <h2>금일 운영 현황</h2>
-          <p>
-            <span>기사 배정률</span>
-            <b>
-              {orders.length
-                ? Math.round(
-                    (orders.filter((f) => f.driver).length / orders.length) *
-                      100,
-                  )
-                : 0}
-              %
-            </b>
-          </p>
-          <p>
-            <span>입금 확인률</span>
-            <b>
-              {orders.length ? Math.round((done / orders.length) * 100) : 0}%
-            </b>
-          </p>
-          <p>
-            <span>오늘 마감</span>
-            <b>
-              {store.closings.find((closing) => closing.date === today)?.closed
-                ? "마감완료"
-                : "마감 전"}
-            </b>
-          </p>
-          <Link className="text-button" to="/closing">
-            일 마감 확인하기 <ChevronRight size={15} />
-          </Link>
-        </section>
-      </div>
-      <section className="panel dashboard-history">
+      <section className="panel dashboard-focus">
         <div className="section-head">
           <div>
-            <h2>최근 실적 및 마감 이력</h2>
-            <p>기간별 매출·매입·수익 추이는 이력조회에서 확인할 수 있습니다.</p>
+            <h2>오늘 확인할 업무</h2>
+            <p>마감 전 처리해야 할 항목입니다.</p>
           </div>
-          <Link to="/history">이력조회</Link>
         </div>
-        <div className="history-preview">
-          <div>
-            <span>최근 누적 매출</span>
-            <b>{money(summary(store.freights).sales)}</b>
-          </div>
-          <div>
-            <span>최근 누적 매입</span>
-            <b>{money(summary(store.freights).purchase)}</b>
-          </div>
-          <div>
-            <span>최근 누적 수익</span>
-            <b>
-              {money(
-                summary(store.freights).sales -
-                  summary(store.freights).purchase,
-              )}
-            </b>
-          </div>
-          <Link to="/history" className="preview-link">
-            기간별 실적 조회 <ChevronRight size={16} />
+        <div className="tasks">
+          <Link to="/freight">
+            <AlertCircle />
+            미입금 <b>{unpaid}건</b>
+            <ChevronRight />
+          </Link>
+          <Link to="/deposits">
+            <AlertCircle />
+            입금 미매칭 <b>{unmatched}건</b>
+            <ChevronRight />
+          </Link>
+          <Link to="/freight">
+            <AlertCircle />
+            기사 미배정 <b>{orders.filter((f) => !f.driver).length}건</b>
+            <ChevronRight />
           </Link>
         </div>
       </section>
